@@ -29,6 +29,7 @@ body {
 /* -------------------- Header -------------- */
 header {
   position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
   display: flex;
@@ -96,7 +97,8 @@ header {
 .characters-list {
   display: none;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  align-content: flex-start;
 }
 
 /* -------------------- Episodes -------------- */
@@ -211,6 +213,38 @@ output {
   color: #f5f5f5;
 }
 
+/* -------------------- Mobile Episodes-------------- */
+.mobile-episodes {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 1.5rem;
+  padding-top: 3px;
+  border: none;
+  background-color: #ff9800;
+  box-shadow: 3px 3px 4px 4px #1111114d;
+  cursor: pointer;
+}
+.mobile-episodes > h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 0.75rem;
+}
+
+/* to be added to 'container-left' class */
+.expand {
+  animation: expand 0.8s forwards ease-out;
+}
+@keyframes expand {
+  from {
+    top: calc(8rem - 100vh);
+  }
+  to {
+    top: 3rem;
+  }
+}
+
 /* -------------------- Loading Spinner -------------- */
 .loading-container {
   display: none;
@@ -280,4 +314,73 @@ a.active-page {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #3c3e44;
+}
+
+/* -------------------- Media Query -------------- */
+
+@media only screen and (max-width: 870px) {
+  .header-left h3 {
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .header-left a {
+    font-size: 1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0;
+  }
+  .header-rigth a {
+    font-size: 0.75rem;
+  }
+  .header-rigth h3 {
+    margin-right: 0.5rem;
+    line-height: 0;
+  }
+
+  .container-left {
+    position: fixed;
+    height: 100%;
+    top: calc(8rem - 100vh);
+    width: 100%;
+  }
+  .container-left.expand {
+    padding-bottom: 7rem;
+    background-color: #24282f;
+  }
+  .container-rigth {
+    flex-basis: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .mobile-episodes {
+    display: flex;
+  }
+
+  .expand .episodes-list {
+    height: 100%;
+  }
+
+  .character {
+    width: 335px;
+    height: 130px;
+    margin: 0 0 1rem 0;
+  }
+  .character-content {
+    padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+  }
+  .character-img > img {
+    min-width: 130px;
+    height: 130px;
+  }
+  .section > h4 {
+    font-size: 1rem;
+  }
+  .section > output,
+  .section > output.status {
+    font-size: 0.75rem;
+  }
+  .section > label {
+    font-size: 0.65rem;
+  }
 }

@@ -1,7 +1,7 @@
 const link = "https://rickandmortyapi.com/api/episode";
 
-export const getEpisodes = (noPage = 1, specialLink = "") => {
-  return fetch(link + `?page=${noPage}` + specialLink, {
+export const getEpisodes = (noPage = 1) => {
+  return fetch(link + `?page=${noPage}`, {
     method: "GET",
   })
     .then((response) => {

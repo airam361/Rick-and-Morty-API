@@ -15,6 +15,10 @@ let svgContainer = document.querySelector(".svg-container");
 let loading = document.querySelector(".loading-container");
 let pagination = document.querySelector(".pagination");
 
+let containerLeft = document.querySelector(".container-left");
+let mobileEpisodesBtn = document.querySelector(".mobile-episodes");
+let mobileEpisodesBtnDescript = document.querySelector(".mobile-episodes h3");
+
 // Helpers
 const getEpisodeId = (element) => {
   return element.getAttribute("episode");
@@ -69,6 +73,17 @@ const toggleSvg = (show) => {
   } else {
     svgContainer.style.display = "none";
     charactersList.style.display = "flex";
+  }
+};
+
+const toggleMobileEpisodes = (show) => {
+  if (show) {
+    containerLeft.classList.add("expand");
+    mobileEpisodesBtnDescript.innerText = "View Characters";
+  } else {
+    containerLeft.classList.remove("expand");
+
+    mobileEpisodesBtnDescript.innerText = "View Episodes";
   }
 };
 
@@ -173,9 +188,11 @@ const displayCharacter = (charactLink) => {
   });
 };
 
+// Event Handlers
 const displayCharacters = (event) => {
   toggleActiveEpisode(event.currentTarget);
   toggleSvg(false);
+  toggleMobileEpisodes(false);
 
   charactersList.innerHTML = "";
 
@@ -210,5 +227,12 @@ const displayEpisodes = (page) => {
     createPaginationEvents();
   });
 };
+
+// Events
+let isExpanded = false;
+mobileEpisodesBtn.addEventListener("click", () => {
+  isExpanded = !isExpanded;
+  toggleMobileEpisodes(isExpanded);
+});
 
 window.addEventListener("load", displayEpisodes);
